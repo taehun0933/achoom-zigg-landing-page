@@ -13,6 +13,7 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: "ZIGG",
   description: "by Team Achoom",
+  icons: "../app/favicon.ico",
 };
 
 export default function RootLayout({
