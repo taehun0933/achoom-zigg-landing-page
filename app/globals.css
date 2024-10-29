@@ -28,3 +28,19 @@ body {
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
     1px 1px 0 white; /* 테두리 색상 */
 }
+
+@keyframes float {
+  0% {
+    transform: translateY(0); /* 초기 위치 */
+  }
+  50% {
+    transform: translateY(-10px); /* 위로 이동하며 회전 */
+  }
+  100% {
+    transform: translateY(0); /* 원래 위치로 돌아감 */
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite; /* 애니메이션 3초 반복 */
+}

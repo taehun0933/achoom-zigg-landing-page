@@ -11,7 +11,7 @@ const OnboardingScreen: React.FC = () => {
       <img
         src="/images/onboarding_mockup.png"
         alt="mockup"
-        className="w-1/3 max-w-[500px] absolute right-[16%] top-[20%]"
+        className="w-1/3 max-w-[500px] absolute right-[16%] top-[20%] animate-float"
       />
       <div className="absolute w-1/3 max-w-[500px] left-[16%] top-[40%]">
         <img src="/images/onboardingText.png" alt="onboardingText" />
