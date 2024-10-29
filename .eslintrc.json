@@ -1,3 +1,7 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "warn", // any 사용 경고로 설정
+    "@typescript-eslint/no-unused-vars": "warn" // 사용되지 않는 변수 경고로 설정
+  }
 }
