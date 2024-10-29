@@ -11,15 +11,15 @@ const OnboardingScreen: React.FC = () => {
       <img
         src="/images/onboarding_mockup.png"
         alt="mockup"
-        className="w-1/3 max-w-[500px] absolute right-[16%] top-[20%] animate-float"
+        className="w-1/3 max-w-[600px] absolute right-[16%] top-[55%] animate-float"
       />
-      <div className="absolute w-1/3 max-w-[500px] left-[16%] top-[40%]">
+      <div className="absolute w-1/3 max-w-[600px] left-[16%] top-[40%]">
         <img src="/images/onboardingText.png" alt="onboardingText" />
         <div className="flex mt-6 gap-2">
           <img
             src="/images/googlePlay.png"
             alt="googlePlay"
-            className="w-36 pointer-events-auto cursor-pointer"
+            className="w-40 pointer-events-auto cursor-pointer"
             onClick={() => {
               window.open(
                 "https://play.google.com/store/apps/details?id=com.achoom.ZIGG&pcampaignid=web_share",
@@ -31,7 +31,7 @@ const OnboardingScreen: React.FC = () => {
           <img
             src="/images/appStore.png"
             alt="appStore"
-            className="w-36 pointer-events-auto cursor-pointer"
+            className="w-40 pointer-events-auto cursor-pointer"
             onClick={() => {
               window.open(
                 "https://apps.apple.com/kr/app/zigg/id6670358731",

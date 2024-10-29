@@ -31,13 +31,13 @@ body {
 
 @keyframes float {
   0% {
-    transform: translateY(0); /* 초기 위치 */
+    transform: translateY(-50%) translateY(0); /* 초기 위치 */
   }
   50% {
-    transform: translateY(-10px); /* 위로 이동하며 회전 */
+    transform: translateY(-50%) translateY(-10px); /* 위로 이동하며 회전 */
   }
   100% {
-    transform: translateY(0); /* 원래 위치로 돌아감 */
+    transform: translateY(-50%) translateY(0); /* 원래 위치로 돌아감 */
   }
 }
 
