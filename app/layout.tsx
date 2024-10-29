@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
+import { ScreenSizeProvider } from "@/context/screenSize-context";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -23,9 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.className} antialiased`}>
-        <Header />
-        {children}
+      <body className={`${pretendard.className} overflow-x-hidden antialiased`}>
+        <ScreenSizeProvider>
+          <Header />
+          {children}
+        </ScreenSizeProvider>
       </body>
     </html>
   );
