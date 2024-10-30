@@ -11,6 +11,7 @@
   -ms-user-drag: none; /* IE 10+ */
   user-select: none; /* 모든 브라우저에서 텍스트 선택 방지 */
   pointer-events: none; /* 포인터 이벤트를 막아 드래그 불가능 */
+  scroll-behavior: smooth;
 }
 
 body {

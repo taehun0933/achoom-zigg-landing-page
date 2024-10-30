@@ -73,7 +73,7 @@ const ServiceScreen: React.FC = () => {
             <IoCallOutline size={40} />
             <span className="text-lg font-semibold">010-9887-8389</span>
           </div>
-          <div className="flex gap-2 items-center justify-center w-60 mr-4">
+          <div className="flex gap-2 items-center justify-center w-60 mr-[2%]">
             <FaInstagram size={40} />
             <span className="text-lg font-semibold mr-12">지그계정아이디</span>
           </div>
