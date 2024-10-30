@@ -19,7 +19,7 @@ const OnboardingScreen: React.FC = () => {
           <img
             src="/images/googlePlay.png"
             alt="googlePlay"
-            className="w-40 pointer-events-auto cursor-pointer"
+            className="w-40 pointer-events-auto cursor-pointer hover:scale-[102%]"
             onClick={() => {
               window.open(
                 "https://play.google.com/store/apps/details?id=com.achoom.ZIGG&pcampaignid=web_share",
@@ -31,7 +31,7 @@ const OnboardingScreen: React.FC = () => {
           <img
             src="/images/appStore.png"
             alt="appStore"
-            className="w-40 pointer-events-auto cursor-pointer"
+            className="w-40 pointer-events-auto cursor-pointer hover:scale-[102%]"
             onClick={() => {
               window.open(
                 "https://apps.apple.com/kr/app/zigg/id6670358731",
