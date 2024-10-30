@@ -1,10 +1,10 @@
 const FeedbackScreen: React.FC = () => {
   return (
-    <div className="bg-[#101E22] h-[100vh]">
+    <div className="bg-[#101E22]">
       <img
         src="/images/feedbackBackground.png"
         alt="feedbackBackground"
-        className="w-full relative"
+        className="w-full"
       />
     </div>
   );

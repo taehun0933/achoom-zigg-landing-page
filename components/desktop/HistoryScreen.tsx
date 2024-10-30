@@ -43,7 +43,7 @@ const HistoryScreen: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full flex flex-col pt-40">
+    <div className="relative w-full flex flex-col pt-64 pb-[300px]">
       <div className="w-full flex justify-center">
         <div className="relative top-[650px]">
           <img
@@ -81,12 +81,6 @@ const HistoryScreen: React.FC = () => {
           />
         </div>
       </div>
-
-      <img
-        src="/images/historyBackground.png"
-        alt="historyBackground"
-        className="mt-[400px]"
-      />
     </div>
   );
 };
