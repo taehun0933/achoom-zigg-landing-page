@@ -6,14 +6,14 @@ const OnboardingScreen: React.FC = () => {
       <img
         src="/images/background.png"
         alt="background"
-        className="w-full h-[70%] max-h-[800px] object-fill absolute"
+        className="w-full h-[500px] xl:h-[600px] 3xl:h-[800px] object-fill absolute transition-all duration-1000"
       />
       <img
         src="/images/onboarding_mockup.png"
         alt="mockup"
         className="w-1/3 max-w-[600px] absolute right-[16%] top-[55%] animate-float"
       />
-      <div className="absolute w-1/3 max-w-[600px] left-[16%] top-[40%]">
+      <div className="absolute w-1/3 max-w-[450px] left-[16%] top-[36%]">
         <img src="/images/onboardingText.png" alt="onboardingText" />
         <div className="flex mt-6 gap-2">
           <img
