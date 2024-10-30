@@ -1,4 +1,70 @@
+import { useEffect, useRef, useState } from "react";
+
 const FeedbackScreen: React.FC = () => {
+  const arrowRef = useRef<HTMLImageElement | null>(null);
+  const checkArrowRef = useRef<HTMLImageElement | null>(null);
+  const verticalArrowRef = useRef<HTMLImageElement | null>(null);
+  const feedbackExplainRef = useRef<HTMLImageElement | null>(null);
+
+  const [isArrowVisible, setIsArrowVisible] = useState(false);
+  const [isCheckArrowVisible, setIsCheckArrowVisible] = useState(false);
+  const [isVerticalArrowVisible, setIsVerticalArrowVisible] = useState(false);
+  const [isFeedbackExplainVisible, setIsFeedbackExplainVisible] =
+    useState(false);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+    };
+
+    const arrowObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsArrowVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    const checkArrowObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsCheckArrowVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    const verticalArrowObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVerticalArrowVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    const feedbackExplainObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsFeedbackExplainVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    if (arrowRef.current) arrowObserver.observe(arrowRef.current);
+    if (checkArrowRef.current)
+      checkArrowObserver.observe(checkArrowRef.current);
+    if (verticalArrowRef.current)
+      verticalArrowObserver.observe(verticalArrowRef.current);
+    if (feedbackExplainRef.current)
+      feedbackExplainObserver.observe(feedbackExplainRef.current);
+
+    return () => {
+      arrowObserver.disconnect();
+      checkArrowObserver.disconnect();
+      feedbackExplainObserver.disconnect();
+      verticalArrowObserver.disconnect();
+    };
+  }, []);
+
   return (
     <div className="bg-[#101E22]">
       <img src="/images/feedbackBackground.png" alt="feedbackBackground" />
@@ -8,7 +74,12 @@ const FeedbackScreen: React.FC = () => {
           <img
             src="/images/feedbackCreateArrow.png"
             alt="spaceMemberInvite"
-            className="max-w-[900px] absolute -top-[54%] right-[1.5%]"
+            ref={arrowRef}
+            className={`max-w-[900px] absolute -top-[54%] right-[1.5%] transition-all duration-700 ${
+              isArrowVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-10"
+            }`}
           />
           <img
             src="/images/feedbackMockup1.png"
@@ -27,7 +98,12 @@ const FeedbackScreen: React.FC = () => {
             <img
               src="/images/feedbackCheckArrow.png"
               alt="feedbackCheckArrow.png"
-              className={`max-w-[450px] absolute top-[29%] left-[70%] transition-all duration-700`}
+              ref={checkArrowRef}
+              className={`max-w-[450px] absolute top-[29%] left-[70%] transition-all duration-700 ${
+                isCheckArrowVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 translate-x-10"
+              }`}
             />
           </div>
 
@@ -41,7 +117,12 @@ const FeedbackScreen: React.FC = () => {
             <img
               src="/images/verticalFeedbackArrow.png"
               alt="verticalFeedbackArrow"
-              className={`max-w-[400px] absolute top-[56%] right-[93%] transition-all duration-700 `}
+              ref={verticalArrowRef}
+              className={`max-w-[400px] absolute top-[56%] right-[93%] transition-all duration-700 ${
+                isVerticalArrowVisible
+                  ? "opacity-100 translate-x-0"
+                  : "opacity-0 -translate-x-10"
+              }`}
             />
           </div>
         </div>
@@ -56,7 +137,10 @@ const FeedbackScreen: React.FC = () => {
         <img
           src="/images/feedbackExplain.png"
           alt="feedbackMockup"
-          className="max-w-[700px] relative right-[2.5%] my-8"
+          ref={feedbackExplainRef}
+          className={`max-w-[700px] relative right-[2.5%] my-8 transition-opacity duration-700 ${
+            isFeedbackExplainVisible ? "opacity-100" : "opacity-0"
+          }`}
         />
 
         <img

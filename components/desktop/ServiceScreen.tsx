@@ -10,11 +10,13 @@ import { FaInstagram } from "react-icons/fa";
 
 const ServiceScreen: React.FC = () => {
   const serviceHeaderRef = useRef<HTMLImageElement | null>(null);
+  const footerRef = useRef<HTMLDivElement | null>(null);
   const [isServiceHeaderVisible, setIsServiceHeaderVisible] = useState(false);
+  const [isFooterTextVisible, setIsFooterTextVisible] = useState(false);
 
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.1, // 요소가 10%만 뷰포트에 보여도 콜백이 실행
+      threshold: 0.1,
     };
 
     const serviceHeaderObserver = new IntersectionObserver((entries) => {
@@ -25,11 +27,27 @@ const ServiceScreen: React.FC = () => {
       });
     }, observerOptions);
 
+    const footerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsFooterTextVisible(true);
+          }
+        });
+      },
+      {
+        threshold: 0.8,
+      }
+    );
+
     if (serviceHeaderRef.current)
       serviceHeaderObserver.observe(serviceHeaderRef.current);
 
+    if (footerRef.current) footerObserver.observe(footerRef.current);
+
     return () => {
       serviceHeaderObserver.disconnect();
+      footerObserver.disconnect();
     };
   }, []);
 
@@ -47,14 +65,19 @@ const ServiceScreen: React.FC = () => {
       <SpaceScreen />
       <HistoryScreen />
       <FeedbackScreen />
-      <footer className="bg-black relative -z-10 bottom-1">
+      <footer className="bg-black relative -z-10 bottom-1" ref={footerRef}>
         <div className="relative">
           <img
             src="/images/footerBackground.png"
             alt="footerBackground"
             className="w-full h-auto"
           />
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center flex flex-col gap-2">
+          {/* 여기 적용 */}
+          <div
+            className={`absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center flex flex-col gap-2 transition-opacity duration-700 ${
+              isFooterTextVisible ? "opacity-100" : "opacity-0"
+            }`}
+          >
             <h1 className="text-5xl font-bold">ZIGG</h1>
             <span className="text-lg font-semibold">
               공연예술의 시작과 끝을 함께
