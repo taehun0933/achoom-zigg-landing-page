@@ -68,7 +68,7 @@ const FeedbackScreen: React.FC = () => {
   return (
     <div className="bg-[#101E22]">
       <img src="/images/feedbackBackground.png" alt="feedbackBackground" />
-      <div className="relative bottom-[300px] w-full flex flex-col items-center">
+      <div className="relative transition-all bottom-[200px] xl:bottom-[300px] w-full flex flex-col items-center">
         <div className="relative">
           {/* 위에서 아래로 페이드인 */}
           <img
