@@ -1,6 +1,9 @@
+import { useScrollRefs } from "@/context/scrollRef-context";
 import { useEffect, useRef, useState } from "react";
 
 const FeedbackScreen: React.FC = () => {
+  const { feedbackRef } = useScrollRefs();
+
   const arrowRef = useRef<HTMLImageElement | null>(null);
   const checkArrowRef = useRef<HTMLImageElement | null>(null);
   const verticalArrowRef = useRef<HTMLImageElement | null>(null);
@@ -71,6 +74,8 @@ const FeedbackScreen: React.FC = () => {
       <div className="relative transition-all bottom-[200px] xl:bottom-[300px] w-full flex flex-col items-center">
         <div className="relative">
           {/* 위에서 아래로 페이드인 */}
+          <div className="absolute top-[-400px]" ref={feedbackRef}></div>
+
           <img
             src="/images/feedbackCreateArrow.png"
             alt="spaceMemberInvite"

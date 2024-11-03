@@ -12,9 +12,12 @@ const NavButton: React.FC<NavButtonProps> = ({
 }) => {
   return (
     <button
-      className={`${largeButton ? "font-semibold" : "font-medium"} ${
+      className={`${largeButton ? "font-bold" : "font-semibold"} ${
         largeButton ? "text-lg" : "text-base"
       } hover:scale-105`}
+      onClick={() => {
+        onClick();
+      }}
     >
       {title}
     </button>

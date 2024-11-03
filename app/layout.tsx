@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
-import { ScreenSizeProvider } from "@/context/screenSize-context";
+import { ScrollRefProvider } from "@/context/scrollRef-context";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -25,10 +25,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${pretendard.className} overflow-x-hidden antialiased`}>
-        <ScreenSizeProvider>
+        <ScrollRefProvider>
           <Header />
           {children}
-        </ScreenSizeProvider>
+        </ScrollRefProvider>
       </body>
     </html>
   );

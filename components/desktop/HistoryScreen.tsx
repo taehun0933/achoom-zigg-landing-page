@@ -1,8 +1,11 @@
 "use client";
 
+import { useScrollRefs } from "@/context/scrollRef-context";
 import { useEffect, useRef, useState } from "react";
 
 const HistoryScreen: React.FC = () => {
+  const { historyRef } = useScrollRefs();
+
   const historyEnterArrowRef = useRef<HTMLImageElement | null>(null);
   const historyCreateArrowRef = useRef<HTMLImageElement | null>(null);
   const [isHistoryEnterArrowVisible, setIsHistoryEnterArrowVisible] =
@@ -44,7 +47,7 @@ const HistoryScreen: React.FC = () => {
 
   return (
     <div className="relative w-full flex flex-col pt-64 pb-[300px]">
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center" ref={historyRef}>
         <div className="relative top-[650px]">
           <img
             src="/images/historyCreate.png"

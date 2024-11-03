@@ -1,8 +1,11 @@
 "use client";
 
+import { useScrollRefs } from "@/context/scrollRef-context";
 import { useEffect, useRef, useState } from "react";
 
 const SpaceScreen: React.FC = () => {
+  const { spaceRef } = useScrollRefs();
+
   const spaceNameArrowRef = useRef<HTMLImageElement | null>(null);
   const memberInviteArrowRef = useRef<HTMLImageElement | null>(null);
   const [isSpaceNameVisible, setIsSpaceNameVisible] = useState(false);
@@ -41,7 +44,7 @@ const SpaceScreen: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full flex flex-col pt-40">
+    <div className="relative w-full flex flex-col pt-40" ref={spaceRef}>
       <div className="w-full flex justify-center">
         <div className="relative">
           <img
