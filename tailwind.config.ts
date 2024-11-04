@@ -13,6 +13,9 @@ const config: Config = {
         foreground: "var(--foreground)",
         accent: "#007AFF",
       },
+      screens: {
+        xs: "450px",
+      },
     },
   },
   plugins: [],

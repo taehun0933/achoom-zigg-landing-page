@@ -7,7 +7,7 @@ const OnboardingScreen: React.FC = () => {
         <img
           src="/images/mobile/onboardingLogo.png"
           alt="background"
-          className="ml-2 transition-all duration-500 w-[250px] sm:w-[300px] md:w-[350px]"
+          className="ml-2 transition-all duration-500 w-[250px] sm:w-[300px] md:w-[350px] pointer-events-none"
         />
         <div className="w-full font-medium text-sm leading-5 sm:text-base sm:leading-6 md:text-lg md:leading-7">
           ZIGG는 공연예술 분야 및 메신저 앱에서 경험하던 불편함을 개선하고 영상
@@ -44,13 +44,13 @@ const OnboardingScreen: React.FC = () => {
       <img
         src="/images/background.png"
         alt="background"
-        className="absolute w-[100vw] top-[45%] left-0 -z-10"
+        className="absolute w-[100vw] top-[45%] left-0 -z-10 pointer-events-none"
       />
 
       <img
         src="/images/onboarding_mockup.png"
         alt="mockup"
-        className="w-full max-w-[600px] mt-6 animate-float-mobile"
+        className="w-full max-w-[600px] mt-6 animate-float-mobile pointer-events-none"
       />
     </div>
   );

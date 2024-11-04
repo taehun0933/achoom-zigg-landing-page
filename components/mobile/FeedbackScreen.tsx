@@ -1,7 +1,10 @@
+import { useScrollRefs } from "@/context/scrollRef-context";
 import { useEffect, useRef, useState } from "react";
 
 const FeedbackScreen: React.FC = () => {
-  const feedbackRef = useRef<HTMLImageElement | null>(null);
+  const { feedbackRef_mobile } = useScrollRefs();
+
+  const feedbackSectionRef = useRef<HTMLImageElement | null>(null);
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
 
   useEffect(() => {
@@ -17,7 +20,8 @@ const FeedbackScreen: React.FC = () => {
       });
     }, observerOptions);
 
-    if (feedbackRef.current) feedbackObserver.observe(feedbackRef.current);
+    if (feedbackSectionRef.current)
+      feedbackObserver.observe(feedbackSectionRef.current);
 
     return () => {
       feedbackObserver.disconnect();
@@ -26,12 +30,12 @@ const FeedbackScreen: React.FC = () => {
 
   return (
     <div className="relative -mt-[150px] -z-10 bg-[#101E22] pt-[60%] pb-32">
-      {/* <div className="relative -top-64 -z-10 bg-[#101E22] pt-96 sm:pt-60 md:pt-[600px] pb-32"> */}
       <img
         src="/images/feedbackBackground.png"
         alt="feedbackBackground"
-        className="absolute top-0"
+        className="absolute top-0 pointer-events-none"
       />
+      <div className="relative -top-24" ref={feedbackRef_mobile}></div>
       <div className="flex flex-col items-center px-9">
         <div
           className={`flex flex-col w-full items-center gap-10 transition-all duration-700 ${
@@ -39,18 +43,18 @@ const FeedbackScreen: React.FC = () => {
               ? "transform translate-y-0 opacity-100"
               : "transform translate-y-10 opacity-0"
           }`}
-          ref={feedbackRef}
+          ref={feedbackSectionRef}
         >
           <img
             src="/images/mobile/feedbackText.png"
             alt="feedbackText"
-            className="w-[70%] max-w-[400px]"
+            className="w-[70%] max-w-[400px] pointer-events-none"
           />
           <div className="w-full flex justify-center">
             <img
               src="/images/mobile/feedbackMockup.png"
               alt="feedbackMockup"
-              className="w-full max-w-[650px]"
+              className="w-full max-w-[650px] pointer-events-none"
             />
           </div>
         </div>

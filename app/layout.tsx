@@ -25,10 +25,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${pretendard.className} overflow-x-hidden antialiased`}>
-        <ScrollRefProvider>
-          <Header />
-          {children}
-        </ScrollRefProvider>
+        <ScrollRefProvider>{children}</ScrollRefProvider>
       </body>
     </html>
   );

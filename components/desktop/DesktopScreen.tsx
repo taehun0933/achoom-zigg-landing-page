@@ -1,3 +1,5 @@
+"use client";
+
 import OnboardingScreen from "./OnBoardingScreen";
 import ServiceScreen from "./ServiceScreen";
 
