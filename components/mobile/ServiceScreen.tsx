@@ -48,7 +48,7 @@ const ServiceScreen: React.FC = () => {
         <img
           src="/images/footerBackground.png"
           alt="footerBackground"
-          className="w-full"
+          className="w-full h-[30vh]"
         />
         <div
           className={`absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center flex flex-col justify-center items-center gap-2 transition-opacity duration-700 ${

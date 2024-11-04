@@ -25,14 +25,14 @@ const FeedbackScreen: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative pb-24">
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[#101E22]" />
+    <div className="relative -mt-[150px] -z-10 bg-[#101E22] pt-[60%] pb-32">
+      {/* <div className="relative -top-64 -z-10 bg-[#101E22] pt-96 sm:pt-60 md:pt-[600px] pb-32"> */}
       <img
         src="/images/feedbackBackground.png"
         alt="feedbackBackground"
-        className="absolute mt-24"
+        className="absolute top-0"
       />
-      <div className="flex flex-col items-center mt-12 px-9 relative">
+      <div className="flex flex-col items-center px-9">
         <div
           className={`flex flex-col w-full items-center gap-10 transition-all duration-700 ${
             isFeedbackVisible
