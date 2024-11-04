@@ -25,7 +25,8 @@ const FeedbackScreen: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="relative pb-24">
+      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[#101E22]" />
       <img
         src="/images/feedbackBackground.png"
         alt="feedbackBackground"
