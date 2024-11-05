@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ScrollRefProvider } from "@/context/scrollRef-context";
-import { url } from "inspector";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -50,7 +49,7 @@ export const metadata: Metadata = {
     siteName: TITLE,
     locale: "ko_KR",
     type: "website",
-    images: ["/opengraph-image.png"],
+    images: ["./opengraph-image.png"],
   },
 };
 
