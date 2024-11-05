@@ -50,7 +50,8 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     type: "website",
     images: [
-      "https://achoom-zigg-landing-page-git-main-taehun0933s-projects.vercel.app/opengraph-image.png",
+      // "https://achoom-zigg-landing-page-git-main-taehun0933s-projects.vercel.app/opengraph-image.png",
+      "/opengraph-image.png",
     ],
   },
 };
