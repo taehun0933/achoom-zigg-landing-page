@@ -49,7 +49,9 @@ export const metadata: Metadata = {
     siteName: TITLE,
     locale: "ko_KR",
     type: "website",
-    images: ["./opengraph-image.png"],
+    images: [
+      "https://achoom-zigg-landing-page-git-main-taehun0933s-projects.vercel.app/opengraph-image.png",
+    ],
   },
 };
 
