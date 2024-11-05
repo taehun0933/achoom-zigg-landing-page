@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   other: {
     name: "facebook-domain-verification",
-    content: process.env.FACEBOOK_DOMAIN_VERIFICATION_KEY,
+    content: "ezsprd29h6nlnusOymzquj7iu9okgl",
   },
 };
 
