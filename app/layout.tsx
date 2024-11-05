@@ -50,6 +50,7 @@ export const metadata: Metadata = {
     siteName: TITLE,
     locale: "ko_KR",
     type: "website",
+    images: ["/opengraph-image.png"],
   },
 };
 
