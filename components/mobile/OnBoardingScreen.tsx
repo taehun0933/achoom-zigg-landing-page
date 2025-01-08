@@ -6,7 +6,7 @@ const OnboardingScreen: React.FC = () => {
       <div className="flex flex-col max-w-[600px] mb-4">
         <img
           src="/images/mobile/onboardingLogo.png"
-          alt="background"
+          alt="onboarding logo"
           className="ml-2 transition-all duration-500 w-[250px] sm:w-[300px] md:w-[350px] pointer-events-none"
         />
         <div className="w-full font-medium text-sm leading-5 sm:text-base sm:leading-6 md:text-lg md:leading-7">
@@ -15,10 +15,8 @@ const OnboardingScreen: React.FC = () => {
           속 유용한 도구들을 제공하는 서비스입니다.
         </div>
         <div className="relative flex w-full mt-4 gap-2 justify-end">
-          <img
-            src="/images/googlePlay.png"
-            alt="googlePlay"
-            className="w-28 md:w-36 pointer-events-auto cursor-pointer hover:scale-[102%]"
+          <button
+            className="w-28 md:w-36 pointer-events-auto cursor-pointer hover:scale-[102%] transition-transform"
             onClick={() => {
               window.open(
                 "https://play.google.com/store/apps/details?id=com.achoom.ZIGG&pcampaignid=web_share",
@@ -26,11 +24,15 @@ const OnboardingScreen: React.FC = () => {
                 "noopener,noreferrer"
               );
             }}
-          />
-          <img
-            src="/images/appStore.png"
-            alt="appStore"
-            className="w-28 md:w-36 pointer-events-auto cursor-pointer hover:scale-[102%]"
+          >
+            <img
+              src="/images/googlePlay.png"
+              alt="Download on Google Play"
+              className="w-full h-auto"
+            />
+          </button>
+          <button
+            className="w-28 md:w-36 pointer-events-auto cursor-pointer hover:scale-[102%] transition-transform"
             onClick={() => {
               window.open(
                 "https://apps.apple.com/kr/app/zigg/id6670358731",
@@ -38,7 +40,13 @@ const OnboardingScreen: React.FC = () => {
                 "noopener,noreferrer"
               );
             }}
-          />
+          >
+            <img
+              src="/images/appStore.png"
+              alt="Download on the App Store"
+              className="w-full h-auto"
+            />
+          </button>
         </div>
       </div>
       <img
@@ -46,7 +54,6 @@ const OnboardingScreen: React.FC = () => {
         alt="background"
         className="absolute w-[100vw] top-[45%] left-0 -z-10 pointer-events-none"
       />
-
       <img
         src="/images/onboarding_mockup.png"
         alt="mockup"

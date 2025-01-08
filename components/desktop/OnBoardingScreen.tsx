@@ -16,10 +16,8 @@ const OnboardingScreen: React.FC = () => {
       <div className="absolute w-1/3 max-w-[450px] left-[16%] top-[36%]">
         <img src="/images/onboardingText.png" alt="onboardingText" />
         <div className="flex mt-6 gap-2">
-          <img
-            src="/images/googlePlay.png"
-            alt="googlePlay"
-            className="w-40 pointer-events-auto cursor-pointer hover:scale-[102%]"
+          <button
+            className="w-40 pointer-events-auto cursor-pointer hover:scale-[102%] transition-transform"
             onClick={() => {
               window.open(
                 "https://play.google.com/store/apps/details?id=com.achoom.ZIGG&pcampaignid=web_share",
@@ -27,11 +25,11 @@ const OnboardingScreen: React.FC = () => {
                 "noopener,noreferrer"
               );
             }}
-          />
-          <img
-            src="/images/appStore.png"
-            alt="appStore"
-            className="w-40 pointer-events-auto cursor-pointer hover:scale-[102%]"
+          >
+            <img src="/images/googlePlay.png" alt="Download on Google Play" />
+          </button>
+          <button
+            className="w-40 pointer-events-auto cursor-pointer hover:scale-[102%] transition-transform"
             onClick={() => {
               window.open(
                 "https://apps.apple.com/kr/app/zigg/id6670358731",
@@ -39,7 +37,9 @@ const OnboardingScreen: React.FC = () => {
                 "noopener,noreferrer"
               );
             }}
-          />
+          >
+            <img src="/images/appStore.png" alt="Download on the App Store" />
+          </button>
         </div>
       </div>
     </div>
