@@ -95,7 +95,7 @@ const ServiceScreen: React.FC = () => {
               </div>
               <div className="flex items-center gap-[10px] font-extralight">
                 <div className="w-14 text-center">전 화</div>
-                <div className="font-normal">010-9887-8389</div>
+                <div className="font-normal">010-9888-8389</div>
               </div>
               <div
                 className="flex items-center gap-[10px] font-extralight"
