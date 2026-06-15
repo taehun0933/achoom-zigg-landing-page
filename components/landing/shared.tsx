@@ -96,19 +96,55 @@ export function Kinetic({ w1, w2 }: { w1: string; w2: string }) {
    (모든 배너를 풀카드 슬라이드로 노출)
    ============================================================ */
 export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
-  const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+  // 양끝에 clone 을 둔 무한 슬라이드. 실제 배너 0번은 트랙 위치 1번에 위치.
+  const [pos, setPos] = useState(1);
+  const [anim, setAnim] = useState(true);
   const ref = useReveal();
 
   const n = banners.length;
-  const go = useCallback((d: number) => setIdx((i) => (i + d + n) % n), [n]);
+  const realIdx = n > 0 ? ((((pos - 1) % n) + n) % n) : 0;
+  // [마지막 clone, ...전체, 첫 clone]
+  const slides = n > 0 ? [banners[n - 1], ...banners, banners[0]] : [];
+
+  const move = useCallback((d: number) => {
+    setAnim(true);
+    setPos((p) => p + d);
+  }, []);
+  const goReal = useCallback((i: number) => {
+    setAnim(true);
+    setPos(i + 1);
+  }, []);
 
   // autoplay (마우스 오버 시 일시정지)
   useEffect(() => {
     if (n <= 1 || paused) return;
-    const id = setInterval(() => setIdx((i) => (i + 1) % n), 5500);
+    const id = setInterval(() => {
+      setAnim(true);
+      setPos((p) => p + 1);
+    }, 5500);
     return () => clearInterval(id);
   }, [n, paused]);
+
+  // clone 에 도달하면 트랜지션 끝난 뒤 애니메이션 없이 실제 위치로 스냅
+  const onTrackEnd = () => {
+    if (pos === n + 1) {
+      setAnim(false);
+      setPos(1);
+    } else if (pos === 0) {
+      setAnim(false);
+      setPos(n);
+    }
+  };
+
+  // 스냅(애니메이션 off) 후 다음 프레임에 다시 애니메이션 활성화
+  useEffect(() => {
+    if (anim) return;
+    const id = requestAnimationFrame(() =>
+      requestAnimationFrame(() => setAnim(true))
+    );
+    return () => cancelAnimationFrame(id);
+  }, [anim]);
 
   return (
     <section className="notice" ref={ref}>
@@ -125,10 +161,10 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
           </div>
           {n > 1 && (
             <div className="nc-arrows">
-              <button onClick={() => go(-1)} aria-label="이전">
+              <button onClick={() => move(-1)} aria-label="이전">
                 ‹
               </button>
-              <button onClick={() => go(1)} aria-label="다음">
+              <button onClick={() => move(1)} aria-label="다음">
                 ›
               </button>
             </div>
@@ -145,26 +181,31 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
           ) : (
             <>
               <div className="nc-card">
-                {banners.map((b, i) => (
-                  <BannerSlide
-                    key={b.noticeId}
-                    banner={b}
-                    active={i === idx}
-                  />
-                ))}
+                <div
+                  className="nc-track"
+                  style={{
+                    transform: `translateX(-${pos * 100}%)`,
+                    transition: anim ? undefined : "none",
+                  }}
+                  onTransitionEnd={onTrackEnd}
+                >
+                  {slides.map((b, i) => (
+                    <BannerSlide key={i} banner={b} />
+                  ))}
+                </div>
               </div>
               <div className="nc-controls">
                 <div className="nc-dots">
                   {banners.map((b, i) => (
                     <b
                       key={b.noticeId}
-                      className={i === idx ? "on" : ""}
-                      onClick={() => setIdx(i)}
+                      className={i === realIdx ? "on" : ""}
+                      onClick={() => goReal(i)}
                     />
                   ))}
                 </div>
                 <span className="nc-date">
-                  {idx + 1} / {n}
+                  {realIdx + 1} / {n}
                 </span>
               </div>
             </>
@@ -175,34 +216,23 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
   );
 }
 
-function BannerSlide({
-  banner,
-  active,
-}: {
-  banner: BannerDto;
-  active: boolean;
-}) {
+function BannerSlide({ banner }: { banner: BannerDto }) {
   const url = banner.bannerImage.onClickUrl;
-  const cls = "nc-fade" + (active ? " on" : "");
   const inner = (
     /* eslint-disable-next-line @next/next/no-img-element */
     <img src={banner.bannerImage.imageKey} alt="ZIGG 공지 배너" />
   );
   return url ? (
     <a
-      className={cls}
+      className="nc-slide"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-hidden={!active}
-      tabIndex={active ? 0 : -1}
     >
       {inner}
     </a>
   ) : (
-    <div className={cls} aria-hidden={!active}>
-      {inner}
-    </div>
+    <div className="nc-slide">{inner}</div>
   );
 }
 
