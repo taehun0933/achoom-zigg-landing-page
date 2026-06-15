@@ -1038,9 +1038,13 @@ a.nc-fade {
 
 .ts-history {
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 300px 1fr;
   gap: 50px;
   align-items: center;
+}
+.ts-history .player {
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .player {
