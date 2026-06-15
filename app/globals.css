@@ -1040,11 +1040,13 @@ a.nc-slide {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 50px;
-  align-items: center;
+  align-items: start;
 }
 .ts-history .player {
   max-width: 300px;
-  margin: 0 auto;
+}
+.ts-history .ts-annot {
+  padding-top: 8px;
 }
 
 .player {
