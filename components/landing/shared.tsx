@@ -7,7 +7,100 @@ import {
   useCallback,
   type RefObject,
 } from "react";
-import type { BannerDto } from "./data";
+import { LINKS, type BannerDto } from "./data";
+
+/* ============================================================
+   앱 다운로드 CTA — 플랫폼 인식
+   iOS → App Store, Android → Play Store, 데스크탑 → 둘 다 선택
+   ============================================================ */
+export function DownloadCTA() {
+  const [platform, setPlatform] = useState<"ios" | "android" | "desktop">(
+    "desktop"
+  );
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ua = navigator.userAgent || "";
+    const isIOS =
+      /iPhone|iPad|iPod/i.test(ua) ||
+      // iPadOS 13+ 는 Mac 으로 위장 + 터치 지원
+      (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    if (isIOS) setPlatform("ios");
+    else if (/Android/i.test(ua)) setPlatform("android");
+    else setPlatform("desktop");
+  }, []);
+
+  // 바깥 클릭 시 닫기
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
+  if (platform === "ios") {
+    return (
+      <a
+        className="nav-cta"
+        href={LINKS.appStore}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        앱 다운로드
+      </a>
+    );
+  }
+  if (platform === "android") {
+    return (
+      <a
+        className="nav-cta"
+        href={LINKS.googlePlay}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        앱 다운로드
+      </a>
+    );
+  }
+  // 데스크탑 → 선택 메뉴
+  return (
+    <div className="dl-wrap" ref={wrapRef}>
+      <button
+        className="nav-cta"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        앱 다운로드
+      </button>
+      {open && (
+        <div className="dl-menu" role="menu">
+          <a
+            href={LINKS.appStore}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+          >
+            <b>iOS</b> App Store
+          </a>
+          <a
+            href={LINKS.googlePlay}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+          >
+            <b>Android</b> Google Play
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /* ---------- scroll reveal hook ---------- */
 export function useReveal(): RefObject<HTMLDivElement> {
@@ -100,6 +193,8 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
   // 양끝에 clone 을 둔 무한 슬라이드. 실제 배너 0번은 트랙 위치 1번에 위치.
   const [pos, setPos] = useState(1);
   const [anim, setAnim] = useState(true);
+  // 전환 중에는 입력을 잠가 clone 범위를 넘어 빈 슬라이드로 가는 것을 방지
+  const lock = useRef(false);
   const ref = useReveal();
 
   const n = banners.length;
@@ -107,35 +202,42 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
   // [마지막 clone, ...전체, 첫 clone]
   const slides = n > 0 ? [banners[n - 1], ...banners, banners[0]] : [];
 
-  const move = useCallback((d: number) => {
+  const step = useCallback((next: number | ((p: number) => number)) => {
+    if (lock.current) return;
+    lock.current = true;
     setAnim(true);
-    setPos((p) => p + d);
+    setPos(next);
   }, []);
-  const goReal = useCallback((i: number) => {
-    setAnim(true);
-    setPos(i + 1);
-  }, []);
+  const move = useCallback((d: number) => step((p) => p + d), [step]);
+  const goReal = useCallback((i: number) => step(i + 1), [step]);
 
   // autoplay (마우스 오버 시 일시정지)
   useEffect(() => {
     if (n <= 1 || paused) return;
     const id = setInterval(() => {
+      if (lock.current) return;
+      lock.current = true;
       setAnim(true);
       setPos((p) => p + 1);
     }, 5500);
     return () => clearInterval(id);
   }, [n, paused]);
 
-  // clone 에 도달하면 트랜지션 끝난 뒤 애니메이션 없이 실제 위치로 스냅
-  const onTrackEnd = () => {
-    if (pos === n + 1) {
-      setAnim(false);
-      setPos(1);
-    } else if (pos === 0) {
-      setAnim(false);
-      setPos(n);
-    }
-  };
+  // 전환 시간이 지나면 잠금 해제. clone 위치면 애니메이션 없이 실제 위치로 스냅.
+  useEffect(() => {
+    if (!lock.current) return;
+    const t = setTimeout(() => {
+      if (pos === n + 1) {
+        setAnim(false);
+        setPos(1);
+      } else if (pos === 0) {
+        setAnim(false);
+        setPos(n);
+      }
+      lock.current = false;
+    }, 640);
+    return () => clearTimeout(t);
+  }, [pos, n]);
 
   // 스냅(애니메이션 off) 후 다음 프레임에 다시 애니메이션 활성화
   useEffect(() => {
@@ -187,7 +289,6 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
                     transform: `translateX(-${pos * 100}%)`,
                     transition: anim ? undefined : "none",
                   }}
-                  onTransitionEnd={onTrackEnd}
                 >
                   {slides.map((b, i) => (
                     <BannerSlide key={i} banner={b} />

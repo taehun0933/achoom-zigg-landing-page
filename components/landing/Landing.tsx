@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MainPage, AuditionPage, TeamSpacePage } from "./pages";
-import { LINKS, type BannerDto, type PublicStats, type Tab } from "./data";
+import { DownloadCTA } from "./shared";
+import { type BannerDto, type PublicStats, type Tab } from "./data";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "main", label: "메인" },
@@ -56,22 +57,15 @@ export default function Landing({
             </button>
           ))}
           <button className="nav-pill soon">CHALLENGE</button>
-          <a
-            className="nav-cta"
-            href={LINKS.appStore}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            앱 다운로드
-          </a>
+          <DownloadCTA />
         </nav>
       </header>
 
       {tab === "main" && <MainPage banners={banners} go={go} />}
       {tab === "audition" && (
-        <AuditionPage banners={auditionBanners} stats={stats} />
+        <AuditionPage banners={auditionBanners} stats={stats} go={go} />
       )}
-      {tab === "teamspace" && <TeamSpacePage />}
+      {tab === "teamspace" && <TeamSpacePage go={go} />}
     </>
   );
 }

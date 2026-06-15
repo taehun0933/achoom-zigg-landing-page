@@ -226,6 +226,63 @@ img {
   box-shadow: 0 16px 36px -10px var(--accent);
 }
 
+/* 앱 다운로드 선택 메뉴 (데스크탑) */
+.dl-wrap {
+  position: relative;
+  margin-left: 10px;
+  display: inline-block;
+}
+.dl-wrap .nav-cta {
+  margin-left: 0;
+}
+.dl-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 200px;
+  padding: 8px;
+  border-radius: 14px;
+  background: rgba(14, 10, 28, 0.92);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 80;
+  animation: dlIn 0.22s var(--ease);
+}
+@keyframes dlIn {
+  from {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.dl-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--tx-3);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.18s var(--ease), color 0.18s var(--ease);
+}
+.dl-menu a b {
+  color: #fff;
+  font-weight: 800;
+}
+.dl-menu a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
 /* ============================================================
    GENERIC PILLS / TAGS
    ============================================================ */
@@ -1038,15 +1095,14 @@ a.nc-slide {
 
 .ts-history {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 50px;
-  align-items: start;
+  grid-template-columns: 300px minmax(0, 420px);
+  justify-content: center;
+  gap: 56px;
+  align-items: center; /* 텍스트를 사진 높이의 세로 중앙에 */
 }
 .ts-history .player {
-  max-width: 300px;
-}
-.ts-history .ts-annot {
-  padding-top: 8px;
+  width: 300px;
+  max-width: 100%;
 }
 
 .player {

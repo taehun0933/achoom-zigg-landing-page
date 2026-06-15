@@ -180,9 +180,11 @@ export function MainPage({
 export function AuditionPage({
   banners,
   stats,
+  go,
 }: {
   banners: BannerDto[];
   stats: PublicStats | null;
+  go?: (t: Tab) => void;
 }) {
   const ref = useReveal();
   return (
@@ -225,13 +227,13 @@ export function AuditionPage({
       </section>
 
       <Marquee blue />
-      <Footer />
+      <Footer go={go} />
     </div>
   );
 }
 
 /* ---------------- TEAM SPACE ---------------- */
-export function TeamSpacePage() {
+export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
   const ref = useReveal();
   return (
     <div className="page" ref={ref}>
@@ -353,7 +355,7 @@ export function TeamSpacePage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer go={go} />
     </div>
   );
 }
