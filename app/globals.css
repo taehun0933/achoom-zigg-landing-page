@@ -161,6 +161,38 @@ img {
   align-items: center;
   gap: 6px;
 }
+
+/* 언어 선택 토글 (메인 옆) */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  margin-right: 4px;
+}
+.lang-toggle button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--tx-mut);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.lang-toggle button:hover {
+  color: #fff;
+}
+.lang-toggle button.on {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1030;
+}
 .nav-pill {
   appearance: none;
   border: 1px solid transparent;

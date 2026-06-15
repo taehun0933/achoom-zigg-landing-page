@@ -4,20 +4,36 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { MainPage, AuditionPage, TeamSpacePage } from "./pages";
 import { DownloadCTA } from "./shared";
 import { type BannerDto, type PublicStats, type Tab } from "./data";
+import { LangProvider, useLang } from "./i18n";
 
-const TABS: { id: Tab; label: string }[] = [
-  { id: "main", label: "메인" },
-  { id: "audition", label: "AUDITION" },
-  { id: "teamspace", label: "TEAM SPACE" },
-];
+function LangToggle() {
+  const { lang, setLang } = useLang();
+  return (
+    <div className="lang-toggle" role="group" aria-label="언어 선택 / language">
+      <button
+        className={lang === "ko" ? "on" : ""}
+        onClick={() => setLang("ko")}
+      >
+        KO
+      </button>
+      <button
+        className={lang === "en" ? "on" : ""}
+        onClick={() => setLang("en")}
+      >
+        EN
+      </button>
+    </div>
+  );
+}
 
-export default function Landing({
+function LandingInner({
   banners,
   stats,
 }: {
   banners: BannerDto[];
   stats: PublicStats | null;
 }) {
+  const { t } = useLang();
   const [tab, setTab] = useState<Tab>("main");
   const [scrolled, setScrolled] = useState(false);
 
@@ -38,6 +54,12 @@ export default function Landing({
     [banners]
   );
 
+  const tabs: { id: Tab; label: string }[] = [
+    { id: "main", label: t.nav.main },
+    { id: "audition", label: "AUDITION" },
+    { id: "teamspace", label: "TEAM SPACE" },
+  ];
+
   return (
     <>
       <header className={"hdr" + (scrolled ? " scrolled" : "")}>
@@ -47,7 +69,8 @@ export default function Landing({
           <b>ZIGG</b>
         </button>
         <nav className="nav">
-          {TABS.map((x) => (
+          <LangToggle />
+          {tabs.map((x) => (
             <button
               key={x.id}
               className={"nav-pill" + (tab === x.id ? " on" : "")}
@@ -67,5 +90,16 @@ export default function Landing({
       )}
       {tab === "teamspace" && <TeamSpacePage go={go} />}
     </>
+  );
+}
+
+export default function Landing(props: {
+  banners: BannerDto[];
+  stats: PublicStats | null;
+}) {
+  return (
+    <LangProvider>
+      <LandingInner {...props} />
+    </LangProvider>
   );
 }

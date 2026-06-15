@@ -1,0 +1,101 @@
+{
+  "nav": { "main": "Main", "download": "Download" },
+  "hero": {
+    "kick": "Performing Arts Assistant ‘ZIGG’",
+    "h1Lead": "Every moment of the stage,",
+    "h1Accent": "together with you",
+    "h1Tail": "",
+    "sub": "All your scattered video feedback, now in one place.\nFrom practice to auditions — every artist’s moment, on ZIGG."
+  },
+  "notice": {
+    "newsLead": "ZIGG ",
+    "newsAccent": "News",
+    "loading": "Loading notices…"
+  },
+  "service": {
+    "eyebrow": "From A to Z of entertainment",
+    "h2Rest": " fixes the friction you used to feel\nwith messenger apps in the performing arts.",
+    "p1": "Built so you can review video feedback at a glance.",
+    "p2pre": "We turn the friction of giving and receiving feedback into ",
+    "p2strong": "a whole new experience",
+    "p2post": ".",
+    "p3": "Online audition links, expert feedback, and a community where users share info — all in one."
+  },
+  "more": "Learn more",
+  "challenge": {
+    "desc": "Same theme, same stage. Artists take on each other’s videos\nand grow together through expert and user feedback.",
+    "tags": ["New challenge every month", "Ranking & voting", "Expert judging"],
+    "feats": [
+      { "title": "Themed challenges", "desc": "Missions by dance·vocal·rap category" },
+      { "title": "Feedback battle", "desc": "Live comments on entrants’ videos" },
+      { "title": "Audition link", "desc": "Top entrants recommended to GODITION" }
+    ]
+  },
+  "audition": {
+    "sub": "A global audition held every month with GODITION",
+    "bannerEmpty": "Passer announcement banners are on the way.",
+    "appLabel": "Total applicants",
+    "appUnit": "",
+    "appDesc": "Global artists take on the ZIGG x GODITION audition every round.",
+    "audLabel": "Total auditions",
+    "audUnit": "",
+    "audDesc": "The total number of auditions held on ZIGG x GODITION so far."
+  },
+  "teamspace": {
+    "spaceLabel": "SPACE",
+    "spaceDesc": "Invite the members you’ll prepare a performance with.",
+    "spaceAnnots": [
+      {
+        "title": "Name your space and build a team",
+        "desc": "The starting point for your team. All videos and feedback gather in one space."
+      },
+      {
+        "title": "Invite members by nickname search",
+        "desc": "Search teammates by nickname and invite them straight into your space."
+      }
+    ],
+    "historyLabel": "HISTORY",
+    "historyDesc": "Upload and review the practice videos you’ve filmed.",
+    "historyAnnots": [
+      {
+        "title": "Each video is called a HISTORY",
+        "desc": "Drop a quick comment inside a history and the whole team can see it."
+      },
+      {
+        "title": "Tap a pin to time-skip to the comment",
+        "desc": "Tap a comment’s pin and the video jumps right to that moment."
+      }
+    ],
+    "keyFunction": "KEY FUNCTION",
+    "keyfuncs": [
+      {
+        "pill": "Easy feedback",
+        "title": "Timestamp PIN",
+        "desc": "Pin a comment to the exact moment in a video. Tabbed feedback shows who each comment is for at a glance."
+      },
+      {
+        "pill": "Archiving",
+        "title": "Practice videos in one place",
+        "desc": "Archive every practice video by date in your history. Records you used to lose become the team’s asset."
+      },
+      {
+        "pill": "Clear communication",
+        "title": "Space · member invites",
+        "desc": "Invite the members preparing the performance with you and exchange videos and feedback precisely, as a team."
+      }
+    ]
+  },
+  "footer": {
+    "desc": "Every moment of performing arts, together with you.",
+    "legal": "Terms · Privacy Policy"
+  },
+  "feedback": [
+    { "t": "1:37", "who": "@everyone", "msg": "Tempo’s a touch fast! 🔥🔥" },
+    {
+      "t": "1:37",
+      "who": "@Jihoon",
+      "msg": "The timing of the raise is off! Let’s count in our heads."
+    },
+    { "t": "1:43", "who": "@Juhyeok", "msg": "Gotta dance it harder" }
+  ]
+}

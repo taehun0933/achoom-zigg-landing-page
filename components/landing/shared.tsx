@@ -8,12 +8,14 @@ import {
   type RefObject,
 } from "react";
 import { LINKS, type BannerDto } from "./data";
+import { useT } from "./i18n";
 
 /* ============================================================
    앱 다운로드 CTA — 플랫폼 인식
    iOS → App Store, Android → Play Store, 데스크탑 → 둘 다 선택
    ============================================================ */
 export function DownloadCTA() {
+  const t = useT();
   const [platform, setPlatform] = useState<"ios" | "android" | "desktop">(
     "desktop"
   );
@@ -51,7 +53,7 @@ export function DownloadCTA() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        앱 다운로드
+        {t.nav.download}
       </a>
     );
   }
@@ -63,7 +65,7 @@ export function DownloadCTA() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        앱 다운로드
+        {t.nav.download}
       </a>
     );
   }
@@ -76,7 +78,7 @@ export function DownloadCTA() {
         aria-haspopup="menu"
         aria-expanded={open}
       >
-        앱 다운로드
+        {t.nav.download}
       </button>
       {open && (
         <div className="dl-menu" role="menu">
@@ -189,6 +191,7 @@ export function Kinetic({ w1, w2 }: { w1: string; w2: string }) {
    (모든 배너를 풀카드 슬라이드로 노출)
    ============================================================ */
 export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
+  const t = useT();
   const [paused, setPaused] = useState(false);
   // 양끝에 clone 을 둔 무한 슬라이드. 실제 배너 0번은 트랙 위치 1번에 위치.
   const [pos, setPos] = useState(1);
@@ -258,7 +261,8 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
               LIVE
             </span>
             <h2>
-              ZIGG <span className="x">소식</span>
+              {t.notice.newsLead}
+              <span className="x">{t.notice.newsAccent}</span>
             </h2>
           </div>
           {n > 1 && (
@@ -279,7 +283,7 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
           onMouseLeave={() => setPaused(false)}
         >
           {n === 0 ? (
-            <div className="nc-skeleton">공지사항을 불러오는 중…</div>
+            <div className="nc-skeleton">{t.notice.loading}</div>
           ) : (
             <>
               <div className="nc-card">
@@ -341,11 +345,12 @@ function BannerSlide({ banner }: { banner: BannerDto }) {
    AUDITION banner cards — image-only banners (합격자 발표 등)
    ============================================================ */
 export function AuditionBanners({ banners }: { banners: BannerDto[] }) {
+  const t = useT();
   if (banners.length === 0) {
     return (
       <div className="aud-cards reveal">
         <div className="nc-skeleton" style={{ flex: 1 }}>
-          합격자 발표 배너를 준비 중입니다.
+          {t.audition.bannerEmpty}
         </div>
       </div>
     );

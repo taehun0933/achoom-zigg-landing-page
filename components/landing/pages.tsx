@@ -9,17 +9,17 @@ import {
   AuditionBanners,
 } from "./shared";
 import {
-  FEEDBACK,
-  KEYFUNCS,
+  KEYFUNC_IMAGES,
   LINKS,
   type BannerDto,
   type PublicStats,
   type Tab,
 } from "./data";
+import { useT, nl2br } from "./i18n";
 
 function fmt(n: number | null | undefined) {
   if (n == null) return "—";
-  return n.toLocaleString("ko-KR");
+  return n.toLocaleString("en-US");
 }
 
 /* ---------------- MAIN ---------------- */
@@ -30,6 +30,7 @@ export function MainPage({
   banners: BannerDto[];
   go: (t: Tab) => void;
 }) {
+  const t = useT();
   const ref = useReveal();
   return (
     <div className="page" ref={ref}>
@@ -40,17 +41,14 @@ export function MainPage({
           <div className="hero-copy">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="zmark" src="/landing/zigg-icon.png" alt="ZIGG" />
-            <div className="kick">공연예술 지원 서비스 ‘ZIGG’</div>
+            <div className="kick">{t.hero.kick}</div>
             <h1>
-              공연예술의 모든 순간을
+              {t.hero.h1Lead}
               <br />
-              <span className="accent">당신과 함께</span>합니다
+              <span className="accent">{t.hero.h1Accent}</span>
+              {t.hero.h1Tail}
             </h1>
-            <p className="sub">
-              메신저로 흩어지던 영상 피드백을 한 눈에.
-              <br />
-              연습부터 오디션까지, 아티스트의 모든 순간을 ZIGG에서.
-            </p>
+            <p className="sub">{nl2br(t.hero.sub)}</p>
             <div className="hero-tags">
               <span className="tag">TEAM SPACE</span>
               <span className="tag">AUDITION</span>
@@ -63,10 +61,10 @@ export function MainPage({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/landing/hero-studio.png"
-                alt="ZIGG x GODITION 연습 현장"
+                alt="ZIGG x GODITION"
               />
             </div>
-            {FEEDBACK.map((f, i) => (
+            {t.feedback.map((f, i) => (
               <div
                 key={i}
                 className="fb-float"
@@ -117,25 +115,19 @@ export function MainPage({
               <img src="/landing/zigg-icon.png" alt="ZIGG" />
             </div>
             <div>
-              <div className="section-label reveal">엔터테인먼트의 A부터 Z까지</div>
+              <div className="section-label reveal">{t.service.eyebrow}</div>
               <h2 className="reveal">
-                <b>ZIGG</b>는 공연예술 분야의 메신저 앱에서
-                <br />
-                경험하던 불편함을 개선합니다.
+                <b>ZIGG</b>
+                {nl2br(t.service.h2Rest)}
               </h2>
-              <p className="hl reveal">
-                영상의 피드백을 한 눈에 확인할 수 있게끔 기획되었습니다.
+              <p className="hl reveal">{t.service.p1}</p>
+              <p className="reveal">
+                {t.service.p2pre}
+                <span className="b">{t.service.p2strong}</span>
+                {t.service.p2post}
               </p>
               <p className="reveal">
-                기존에 피드백을 주고받는 과정에서 느꼈던 불편함들을{" "}
-                <span className="b">새로운 방식</span>으로 풀어나가는 경험을
-                제공합니다.
-              </p>
-              <p className="reveal">
-                <span className="blue">
-                  엔터테인먼트 온라인 오디션 연계, 전문가 피드백, 유저끼리 정보를
-                  나누는 커뮤니티까지!
-                </span>
+                <span className="blue">{t.service.p3}</span>
               </p>
             </div>
           </div>
@@ -149,7 +141,7 @@ export function MainPage({
             className="section-label reveal"
             style={{ display: "block", marginBottom: 28 }}
           >
-            더 알아보기
+            {t.more}
           </div>
           <div
             className="reveal"
@@ -186,6 +178,7 @@ export function AuditionPage({
   stats: PublicStats | null;
   go?: (t: Tab) => void;
 }) {
+  const t = useT();
   const ref = useReveal();
   return (
     <div className="page" ref={ref}>
@@ -194,33 +187,27 @@ export function AuditionPage({
           <div className="ph">
             <Lockup />
             <Kinetic w1="AUDITION" w2="GODITION" />
-            <div className="ph-sub reveal">
-              GODITION과 함께 매월 진행되는 Global 오디션
-            </div>
+            <div className="ph-sub reveal">{t.audition.sub}</div>
           </div>
 
           <AuditionBanners banners={banners} />
 
           <div className="aud-stats">
             <div className="aud-stat a reveal">
-              <div className="as-k">누적 지원자 수</div>
+              <div className="as-k">{t.audition.appLabel}</div>
               <div className="as-v">
                 {fmt(stats?.totalApplications)}
-                <small>명</small>
+                {t.audition.appUnit && <small>{t.audition.appUnit}</small>}
               </div>
-              <div className="as-d">
-                매 회차 글로벌 아티스트가 ZIGG x GODITION 오디션에 도전합니다.
-              </div>
+              <div className="as-d">{t.audition.appDesc}</div>
             </div>
             <div className="aud-stat b reveal">
-              <div className="as-k">누적 오디션 수</div>
+              <div className="as-k">{t.audition.audLabel}</div>
               <div className="as-v">
                 {fmt(stats?.totalAuditions)}
-                <small>회</small>
+                {t.audition.audUnit && <small>{t.audition.audUnit}</small>}
               </div>
-              <div className="as-d">
-                지금까지 ZIGG x GODITION에서 진행된 누적 오디션 횟수입니다.
-              </div>
+              <div className="as-d">{t.audition.audDesc}</div>
             </div>
           </div>
         </div>
@@ -234,6 +221,7 @@ export function AuditionPage({
 
 /* ---------------- TEAM SPACE ---------------- */
 export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
+  const t = useT();
   const ref = useReveal();
   return (
     <div className="page" ref={ref}>
@@ -253,8 +241,8 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
           {/* SPACE — 멤버 초대 */}
           <div className="ts-block">
             <div className="tb-head reveal">
-              <div className="lbl">SPACE</div>
-              <div className="dsc">같이 공연을 준비할 멤버를 초대합니다.</div>
+              <div className="lbl">{t.teamspace.spaceLabel}</div>
+              <div className="dsc">{t.teamspace.spaceDesc}</div>
             </div>
             <div className="ts-space">
               <div className="reveal" style={{ maxWidth: 300, margin: "0 auto" }}>
@@ -264,33 +252,22 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/spaceMemberInvite.png"
-                      alt="스페이스 멤버 초대"
+                      alt="space member invite"
                       style={{ objectPosition: "top" }}
                     />
                   </div>
                 </div>
               </div>
               <div className="ts-annot">
-                <div className="an">
-                  <b>스페이스 이름을 정하고 팀을 만드세요</b>
-                  <span>
-                    함께 공연을 준비할 팀의 시작점. 한 스페이스에 모든 영상과
-                    피드백이 모입니다.
-                  </span>
-                </div>
-                <div className="an">
-                  <b>닉네임 검색으로 멤버 초대</b>
-                  <span>
-                    함께할 동료를 닉네임으로 검색해 바로 스페이스에 초대할 수
-                    있어요.
-                  </span>
-                </div>
+                {t.teamspace.spaceAnnots.map((a, i) => (
+                  <div className="an" key={i}>
+                    <b>{a.title}</b>
+                    <span>{a.desc}</span>
+                  </div>
+                ))}
                 <div className="player reveal">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/landing/teamspace-1.png"
-                    alt="전체화면 피드백"
-                  />
+                  <img src="/landing/teamspace-1.png" alt="fullscreen feedback" />
                 </div>
               </div>
             </div>
@@ -299,32 +276,23 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
           {/* HISTORY — 연습 영상 업로드/피드백 */}
           <div className="ts-block">
             <div className="tb-head reveal">
-              <div className="lbl">HISTORY</div>
-              <div className="dsc">
-                촬영한 연습 영상을 업로드하고 확인해볼 수 있어요.
-              </div>
+              <div className="lbl">{t.teamspace.historyLabel}</div>
+              <div className="dsc">{t.teamspace.historyDesc}</div>
             </div>
             <div className="ts-history">
               <div className="reveal">
                 <div className="player">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/landing/teamspace-2.png" alt="히스토리 상세" />
+                  <img src="/landing/teamspace-2.png" alt="history detail" />
                 </div>
               </div>
               <div className="ts-annot">
-                <div className="an">
-                  <b>각각의 영상을 HISTORY라고 부릅니다</b>
-                  <span>
-                    히스토리 안에서 간편하게 코멘트를 입력하면 팀 전체가 확인할
-                    수 있어요.
-                  </span>
-                </div>
-                <div className="an">
-                  <b>핀 터치 시 코멘트로 타임스킵</b>
-                  <span>
-                    코멘트의 핀을 누르면 영상이 해당 구간으로 바로 이동합니다.
-                  </span>
-                </div>
+                {t.teamspace.historyAnnots.map((a, i) => (
+                  <div className="an" key={i}>
+                    <b>{a.title}</b>
+                    <span>{a.desc}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -335,16 +303,16 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
               className="section-label reveal"
               style={{ display: "block", fontSize: 22, letterSpacing: ".06em" }}
             >
-              KEY FUNCTION
+              {t.teamspace.keyFunction}
             </div>
             <div className="kf-grid">
-              {KEYFUNCS.map((k, i) => (
+              {t.teamspace.keyfuncs.map((k, i) => (
                 <div className="kf-card reveal" key={i}>
-                  <div className="kf-n">{k.n}</div>
+                  <div className="kf-n">key function {i + 1}</div>
                   <div className="kf-pill">{k.pill}</div>
                   <div className="kf-shot">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={k.img} alt={k.title} />
+                    <img src={KEYFUNC_IMAGES[i]} alt={k.title} />
                   </div>
                   <h4>{k.title}</h4>
                   <p>{k.desc}</p>
@@ -362,6 +330,7 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
 
 /* ---------------- CHALLENGE teaser ---------------- */
 export function ChallengeTeaser() {
+  const t = useT();
   const ref = useReveal();
   return (
     <section className="chl" ref={ref}>
@@ -371,29 +340,21 @@ export function ChallengeTeaser() {
           <h2>
             ZIGG <span className="g">CHALLENGE</span>
           </h2>
-          <p>
-            같은 주제, 같은 무대. 아티스트들이 서로의 영상에 도전하고
-            <br />
-            전문가와 유저의 피드백으로 함께 성장하는 새로운 방식.
-          </p>
+          <p>{nl2br(t.challenge.desc)}</p>
           <div className="chl-row">
-            <span className="tag">매월 새로운 챌린지</span>
-            <span className="tag">랭킹 &amp; 투표</span>
-            <span className="tag">전문가 심사</span>
+            {t.challenge.tags.map((tag, i) => (
+              <span className="tag" key={i}>
+                {tag}
+              </span>
+            ))}
           </div>
           <div className="chl-feat">
-            <div>
-              <b>주제별 챌린지</b>
-              <span>댄스·보컬·랩 부문별 미션 공개</span>
-            </div>
-            <div>
-              <b>피드백 배틀</b>
-              <span>참가자 영상에 실시간 코멘트</span>
-            </div>
-            <div>
-              <b>오디션 연계</b>
-              <span>우수 참가자 GODITION 추천</span>
-            </div>
+            {t.challenge.feats.map((f, i) => (
+              <div key={i}>
+                <b>{f.title}</b>
+                <span>{f.desc}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -403,6 +364,7 @@ export function ChallengeTeaser() {
 
 /* ---------------- FOOTER ---------------- */
 export function Footer({ go }: { go?: (t: Tab) => void }) {
+  const t = useT();
   return (
     <footer className="ft">
       <div className="wrap ft-grid">
@@ -412,7 +374,7 @@ export function Footer({ go }: { go?: (t: Tab) => void }) {
             <img src="/landing/zigg-icon.png" alt="" />
             <b>ZIGG</b>
           </div>
-          <p className="ft-desc">공연예술의 모든 순간을 당신과 함께합니다.</p>
+          <p className="ft-desc">{t.footer.desc}</p>
           <div className="ft-store">
             <a href={LINKS.appStore} target="_blank" rel="noopener noreferrer">
               App Store
@@ -425,7 +387,7 @@ export function Footer({ go }: { go?: (t: Tab) => void }) {
         <div className="ft-cols">
           <div className="ft-col">
             <h5>Product</h5>
-            <a onClick={() => go?.("main")}>메인</a>
+            <a onClick={() => go?.("main")}>{t.nav.main}</a>
             <a onClick={() => go?.("audition")}>Audition</a>
             <a onClick={() => go?.("teamspace")}>Team Space</a>
             <a>
@@ -455,7 +417,7 @@ export function Footer({ go }: { go?: (t: Tab) => void }) {
       </div>
       <div className="wrap ft-base">
         <span>© 2025 ZIGG. All rights reserved.</span>
-        <span>이용약관 · 개인정보처리방침</span>
+        <span>{t.footer.legal}</span>
       </div>
     </footer>
   );
