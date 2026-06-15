@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ScrollRefProvider } from "@/context/scrollRef-context";
 import Script from "next/script";
 
 const pretendard = localFont({
@@ -90,8 +89,10 @@ export default function RootLayout({
           />
         </noscript>
       </head>
-      <body className={`${pretendard.className} overflow-x-hidden antialiased`}>
-        <ScrollRefProvider>{children}</ScrollRefProvider>
+      <body
+        className={`${pretendard.variable} ${pretendard.className} overflow-x-hidden antialiased`}
+      >
+        {children}
       </body>
     </html>
   );
