@@ -97,19 +97,18 @@ export function Kinetic({ w1, w2 }: { w1: string; w2: string }) {
    ============================================================ */
 export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
   const [idx, setIdx] = useState(0);
-  const timer = useRef<ReturnType<typeof setInterval>>();
+  const [paused, setPaused] = useState(false);
   const ref = useReveal();
 
   const n = banners.length;
   const go = useCallback((d: number) => setIdx((i) => (i + d + n) % n), [n]);
 
-  // autoplay
+  // autoplay (마우스 오버 시 일시정지)
   useEffect(() => {
-    if (n <= 1) return;
-    clearInterval(timer.current);
-    timer.current = setInterval(() => setIdx((i) => (i + 1) % n), 5200);
-    return () => clearInterval(timer.current);
-  }, [n]);
+    if (n <= 1 || paused) return;
+    const id = setInterval(() => setIdx((i) => (i + 1) % n), 5500);
+    return () => clearInterval(id);
+  }, [n, paused]);
 
   return (
     <section className="notice" ref={ref}>
@@ -118,12 +117,11 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
           <div>
             <span className="live-dot">
               <i />
-              LIVE · 앱 공지사항 API 연동
+              LIVE
             </span>
             <h2>
               ZIGG <span className="x">소식</span>
             </h2>
-            <p>앱에서 보던 공지·이벤트·업데이트 배너를 랜딩에서도.</p>
           </div>
           {n > 1 && (
             <div className="nc-arrows">
@@ -137,12 +135,24 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
           )}
         </div>
 
-        <div className="nc-stage reveal">
+        <div
+          className="nc-stage reveal"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
           {n === 0 ? (
             <div className="nc-skeleton">공지사항을 불러오는 중…</div>
           ) : (
             <>
-              <BannerSlide key={banners[idx].noticeId} banner={banners[idx]} />
+              <div className="nc-card">
+                {banners.map((b, i) => (
+                  <BannerSlide
+                    key={b.noticeId}
+                    banner={b}
+                    active={i === idx}
+                  />
+                ))}
+              </div>
               <div className="nc-controls">
                 <div className="nc-dots">
                   {banners.map((b, i) => (
@@ -165,26 +175,33 @@ export function NoticeCarousel({ banners }: { banners: BannerDto[] }) {
   );
 }
 
-function BannerSlide({ banner }: { banner: BannerDto }) {
+function BannerSlide({
+  banner,
+  active,
+}: {
+  banner: BannerDto;
+  active: boolean;
+}) {
   const url = banner.bannerImage.onClickUrl;
+  const cls = "nc-fade" + (active ? " on" : "");
   const inner = (
     /* eslint-disable-next-line @next/next/no-img-element */
     <img src={banner.bannerImage.imageKey} alt="ZIGG 공지 배너" />
   );
-  return (
-    <div className="nc-card nc-slide enter">
-      {url ? (
-        <a
-          className="nc-banner clickable"
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {inner}
-        </a>
-      ) : (
-        <div className="nc-banner">{inner}</div>
-      )}
+  return url ? (
+    <a
+      className={cls}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-hidden={!active}
+      tabIndex={active ? 0 : -1}
+    >
+      {inner}
+    </a>
+  ) : (
+    <div className={cls} aria-hidden={!active}>
+      {inner}
     </div>
   );
 }

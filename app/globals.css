@@ -622,35 +622,30 @@ button.tag {
   );
   display: block;
 }
-.nc-banner {
-  position: relative;
+/* crossfade + 은은한 줌(ken burns) — 클래스 토글 transition (fill:both 함정 회피) */
+.nc-fade {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: 100%;
-  height: 100%;
+  opacity: 0;
+  transform: scale(1.045);
+  transition: opacity 0.9s var(--ease), transform 1.3s var(--ease);
+  pointer-events: none;
 }
-.nc-banner img {
+.nc-fade.on {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+a.nc-fade {
+  cursor: pointer;
+}
+.nc-fade img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.nc-banner.clickable {
-  cursor: pointer;
-}
-.nc-slide {
-  transition: transform 0.5s var(--ease);
-}
-.nc-slide.enter {
-  animation: slideIn 0.55s var(--ease);
-}
-@keyframes slideIn {
-  from {
-    transform: translateX(34px);
-  }
-  to {
-    transform: none;
-  }
 }
 
 .nc-skeleton {
