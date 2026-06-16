@@ -143,6 +143,8 @@ img {
   border: none;
   /* 브랜드는 좌측, 나머지(언어·탭·다운로드·햄버거)는 우측으로 묶음 */
   margin-right: auto;
+  /* 공간 부족 시 로고가 눌려 토글과 겹치지 않도록 */
+  flex-shrink: 0;
 }
 .brand img {
   width: 30px;
@@ -206,6 +208,7 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.04);
   margin-right: 4px;
+  flex-shrink: 0;
 }
 .lang-toggle button {
   appearance: none;
@@ -285,6 +288,7 @@ img {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  white-space: nowrap;
   transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
   box-shadow: 0 10px 30px -10px var(--accent);
 }
@@ -298,6 +302,7 @@ img {
   position: relative;
   margin-left: 10px;
   display: inline-block;
+  flex-shrink: 0;
 }
 .dl-wrap .nav-cta {
   margin-left: 0;
@@ -1457,8 +1462,9 @@ a.nc-slide {
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 720px) {
-  /* 모바일 헤더: 브랜드 | (우측) 언어·다운로드·햄버거 — 항상 노출 */
+@media (max-width: 960px) {
+  /* 모바일/태블릿 헤더: 브랜드 | (우측) 언어·다운로드·햄버거 — 항상 노출
+     가로 nav 가 한 줄에 안 들어가 겹치기 전에 햄버거로 전환 */
   .hdr {
     padding: 14px 16px;
   }
