@@ -1450,6 +1450,10 @@ a.nc-slide {
   .svc-icon {
     margin: 0 auto;
   }
+  .svc p {
+    margin-left: auto;
+    margin-right: auto;
+  }
   .ts-space,
   .ts-history {
     grid-template-columns: 1fr;
