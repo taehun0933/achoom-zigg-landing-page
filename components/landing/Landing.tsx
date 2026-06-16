@@ -36,6 +36,7 @@ function LandingInner({
   const { t } = useLang();
   const [tab, setTab] = useState<Tab>("main");
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -45,6 +46,7 @@ function LandingInner({
 
   const go = useCallback((to: Tab) => {
     setTab(to);
+    setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
@@ -68,7 +70,17 @@ function LandingInner({
           <img src="/landing/zigg-icon.png" alt="ZIGG" />
           <b>ZIGG</b>
         </button>
-        <nav className="nav">
+        <button
+          className={"nav-burger" + (menuOpen ? " open" : "")}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="메뉴 / menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <nav className={"nav" + (menuOpen ? " open" : "")}>
           <LangToggle />
           {tabs.map((x) => (
             <button
