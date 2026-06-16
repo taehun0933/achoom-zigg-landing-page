@@ -17,6 +17,29 @@ export type Lang = "ko" | "en";
 const STRINGS = { ko, en } as const;
 export type Strings = (typeof STRINGS)["ko"];
 
+/**
+ * 브라우저 정보로 언어 자동 감지 (권한 팝업 없음).
+ * 1) 선호 언어 목록(navigator.languages) 에 한국어가 있으면 ko
+ * 2) 없으면 타임존(위치 추정)이 한국이면 ko  ← GPS 권한 없이 즉시 판별
+ * 3) 그 외 영어
+ */
+function detectLang(): Lang {
+  try {
+    const prefs = (
+      navigator.languages?.length ? navigator.languages : [navigator.language]
+    )
+      .filter(Boolean)
+      .map((l) => l.toLowerCase());
+    if (prefs.some((l) => l.startsWith("ko"))) return "ko";
+
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone ?? "";
+    if (tz === "Asia/Seoul" || tz === "Asia/Pyongyang") return "ko";
+  } catch {
+    /* noop */
+  }
+  return "en";
+}
+
 /** "\n" 을 <br/> 로 렌더 */
 export function nl2br(text: string): ReactNode {
   return text.split("\n").map((line, i, arr) => (
@@ -49,8 +72,8 @@ export function LangProvider({ children }: { children: ReactNode }) {
         setLangState(stored);
         return;
       }
-      const nav = navigator.language?.toLowerCase() ?? "";
-      setLangState(nav.startsWith("ko") ? "ko" : "en");
+      // 사용자가 직접 고른 적 없으면 브라우저 언어·위치로 자동 감지
+      setLangState(detectLang());
     } catch {
       /* noop */
     }
