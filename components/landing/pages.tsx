@@ -50,9 +50,22 @@ export function MainPage({
             </h1>
             <p className="sub">{nl2br(t.hero.sub)}</p>
             <div className="hero-tags">
-              <span className="tag">TEAM SPACE</span>
-              <span className="tag">AUDITION</span>
-              <span className="tag">CHALLENGE</span>
+              <button className="tag" onClick={() => go("teamspace")}>
+                TEAM SPACE
+              </button>
+              <button className="tag" onClick={() => go("audition")}>
+                AUDITION
+              </button>
+              <button
+                className="tag"
+                onClick={() =>
+                  document
+                    .getElementById("challenge")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+              >
+                CHALLENGE
+              </button>
             </div>
           </div>
 
