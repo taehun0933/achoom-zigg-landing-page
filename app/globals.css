@@ -123,7 +123,7 @@ img {
   z-index: 60;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 6px;
   padding: 18px 34px;
   transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease),
     padding 0.4s var(--ease);
@@ -141,6 +141,8 @@ img {
   cursor: pointer;
   background: none;
   border: none;
+  /* 브랜드는 좌측, 나머지(언어·탭·다운로드·햄버거)는 우측으로 묶음 */
+  margin-right: auto;
 }
 .brand img {
   width: 30px;
@@ -1454,10 +1456,33 @@ a.nc-slide {
   }
 }
 @media (max-width: 720px) {
+  /* 모바일 헤더: 브랜드 | (우측) 언어·다운로드·햄버거 — 항상 노출 */
+  .hdr {
+    padding: 14px 16px;
+  }
+  .hdr.scrolled {
+    padding: 10px 16px;
+  }
   .nav-burger {
     display: flex;
   }
-  /* nav 를 헤더 아래로 떨어지는 드롭다운 패널로 전환 */
+  /* 언어 토글·다운로드 버튼은 헤더 바에 컴팩트하게 상시 노출 */
+  .hdr .lang-toggle {
+    margin-right: 0;
+  }
+  .hdr .lang-toggle button {
+    padding: 5px 9px;
+  }
+  .hdr .nav-cta {
+    margin-left: 0;
+    padding: 8px 13px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .hdr .dl-wrap {
+    margin-left: 0;
+  }
+  /* nav(페이지 탭)만 헤더 아래로 떨어지는 드롭다운 패널로 전환 */
   .hdr .nav {
     display: none;
     position: absolute;
@@ -1478,24 +1503,11 @@ a.nc-slide {
   .hdr .nav.open {
     display: flex;
   }
-  .hdr .nav .lang-toggle {
-    margin-right: 0;
-    align-self: flex-start;
-  }
   .hdr .nav .nav-pill {
     width: 100%;
     text-align: left;
     font-size: 15.5px;
     padding: 12px 16px;
-  }
-  .hdr .nav .nav-cta,
-  .hdr .nav .dl-wrap {
-    margin-left: 0;
-    width: 100%;
-    text-align: center;
-  }
-  .hdr .nav .dl-wrap .nav-cta {
-    width: 100%;
   }
   .wrap {
     padding: 0 20px;

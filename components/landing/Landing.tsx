@@ -70,18 +70,9 @@ function LandingInner({
           <img src="/landing/zigg-icon.png" alt="ZIGG" />
           <b>ZIGG</b>
         </button>
-        <button
-          className={"nav-burger" + (menuOpen ? " open" : "")}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="메뉴 / menu"
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        {/* 언어 토글 — 데스크탑은 탭 앞, 모바일은 햄버거 왼쪽에 항상 노출 */}
+        <LangToggle />
         <nav className={"nav" + (menuOpen ? " open" : "")}>
-          <LangToggle />
           {tabs.map((x) => (
             <button
               key={x.id}
@@ -92,8 +83,19 @@ function LandingInner({
             </button>
           ))}
           <button className="nav-pill soon">CHALLENGE</button>
-          <DownloadCTA />
         </nav>
+        {/* 앱 다운로드 — 모바일에서도 항상 노출(플랫폼별 스토어 자동 분기) */}
+        <DownloadCTA />
+        <button
+          className={"nav-burger" + (menuOpen ? " open" : "")}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="메뉴 / menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </header>
 
       {tab === "main" && <MainPage banners={banners} go={go} />}
