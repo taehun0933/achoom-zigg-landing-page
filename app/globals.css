@@ -255,11 +255,11 @@ img {
 }
 .nav-pill.soon {
   color: var(--tx-dim);
-  cursor: default;
+  cursor: pointer;
 }
 .nav-pill.soon:hover {
-  background: transparent;
-  color: var(--tx-dim);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--tx-3);
 }
 .nav-pill.soon::after {
   content: "SOON";
@@ -1256,6 +1256,8 @@ a.nc-slide {
   padding: 150px 0;
   overflow: hidden;
   background: linear-gradient(180deg, #0a0620, #120730);
+  /* 고정 헤더 아래로 가리지 않도록 스크롤 정렬 오프셋 */
+  scroll-margin-top: 80px;
 }
 .chl::before {
   content: "";

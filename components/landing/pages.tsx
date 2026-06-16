@@ -333,7 +333,7 @@ export function ChallengeTeaser() {
   const t = useT();
   const ref = useReveal();
   return (
-    <section className="chl" ref={ref}>
+    <section className="chl" id="challenge" ref={ref}>
       <div className="wrap">
         <div className="chl-inner reveal">
           <span className="soon-pill">◆ COMING SOON</span>

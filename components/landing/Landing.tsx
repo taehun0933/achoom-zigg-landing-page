@@ -50,6 +50,21 @@ function LandingInner({
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
+  // CHALLENGE 는 별도 탭이 없고 메인 하단 티저 섹션이 콘텐츠 →
+  // 메인으로 전환한 뒤 챌린지 섹션으로 스크롤
+  const goChallenge = useCallback(() => {
+    setMenuOpen(false);
+    setTab("main");
+    // 메인이 렌더된 다음 프레임에 스크롤 (탭 전환 직후에도 동작)
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        document
+          .getElementById("challenge")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      })
+    );
+  }, []);
+
   // BANNER_ONLY 배너만 오디션 합격자 카드로 사용
   const auditionBanners = useMemo(
     () => banners.filter((b) => b.noticeLayout === "BANNER_ONLY"),
@@ -82,7 +97,9 @@ function LandingInner({
               {x.label}
             </button>
           ))}
-          <button className="nav-pill soon">CHALLENGE</button>
+          <button className="nav-pill soon" onClick={goChallenge}>
+            CHALLENGE
+          </button>
         </nav>
         {/* 앱 다운로드 — 모바일에서도 항상 노출(플랫폼별 스토어 자동 분기) */}
         <DownloadCTA />
