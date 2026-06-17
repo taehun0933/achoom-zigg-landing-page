@@ -740,7 +740,10 @@ button.tag {
 }
 .nc-card {
   position: relative;
-  height: 372px;
+  aspect-ratio: 9 / 5.16; /* 배너와 동일 비율 → 잘림/여백 없이 딱 맞음 */
+  width: 100%;
+  max-width: 980px; /* 넓은 화면에서 과도하게 커지지 않게 */
+  margin-inline: auto;
   border-radius: 26px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -778,7 +781,10 @@ a.nc-slide {
 }
 
 .nc-skeleton {
-  height: 372px;
+  aspect-ratio: 9 / 5.16;
+  width: 100%;
+  max-width: 980px;
+  margin-inline: auto;
   border-radius: 26px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(
@@ -1533,6 +1539,6 @@ a.nc-slide {
   }
   .nc-card,
   .nc-skeleton {
-    height: 240px;
+    max-width: none; /* 모바일은 풀폭, 높이는 9:5.16 비율로 자동 */
   }
 }
