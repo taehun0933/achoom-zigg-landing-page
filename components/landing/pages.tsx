@@ -391,11 +391,11 @@ export function Footer({ go }: { go?: (t: Tab) => void }) {
           <div className="ft-store">
             <a href={LINKS.appStore} target="_blank" rel="noopener noreferrer">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/appStore.png" alt="Download on the App Store" />
+              <img src="/images/appStore.webp" alt="Download on the App Store" />
             </a>
             <a href={LINKS.googlePlay} target="_blank" rel="noopener noreferrer">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/googlePlay.png" alt="Get it on Google Play" />
+              <img src="/images/googlePlay.webp" alt="Get it on Google Play" />
             </a>
           </div>
         </div>
