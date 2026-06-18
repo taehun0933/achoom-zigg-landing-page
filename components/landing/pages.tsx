@@ -40,7 +40,7 @@ export function MainPage({
         <div className="hero-grid">
           <div className="hero-copy">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="zmark" src="/landing/zigg-icon.png" alt="ZIGG" />
+            <img className="zmark" src="/landing/zigg-icon.webp" alt="ZIGG" />
             <div className="kick">{t.hero.kick}</div>
             <h1>
               {t.hero.h1Lead}
@@ -73,7 +73,7 @@ export function MainPage({
             <div className="hero-photo">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/landing/hero-studio.png"
+                src="/landing/hero-studio.webp"
                 alt="ZIGG x GODITION"
               />
             </div>
@@ -125,7 +125,7 @@ export function MainPage({
           <div className="svc-grid">
             <div className="svc-icon reveal">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/landing/zigg-icon.png" alt="ZIGG" />
+              <img src="/landing/zigg-icon.webp" alt="ZIGG" />
             </div>
             <div>
               <div className="section-label reveal">{t.service.eyebrow}</div>
@@ -244,7 +244,7 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="z"
-              src="/landing/zigg-icon.png"
+              src="/landing/zigg-icon.webp"
               alt="ZIGG"
               style={{ width: 56, margin: "0 auto 22px" }}
             />
@@ -264,7 +264,7 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
                   <div className="phone-screen" style={{ background: "#fff" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/images/spaceMemberInvite.png"
+                      src="/images/spaceMemberInvite.webp"
                       alt="space member invite"
                       style={{ objectPosition: "top" }}
                     />
@@ -280,7 +280,7 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
                 ))}
                 <div className="player reveal">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/landing/teamspace-1.png" alt="fullscreen feedback" />
+                  <img src="/landing/teamspace-1.webp" alt="fullscreen feedback" />
                 </div>
               </div>
             </div>
@@ -296,7 +296,7 @@ export function TeamSpacePage({ go }: { go?: (t: Tab) => void }) {
               <div className="reveal">
                 <div className="player">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/landing/teamspace-2.png" alt="history detail" />
+                  <img src="/landing/teamspace-2.webp" alt="history detail" />
                 </div>
               </div>
               <div className="ts-annot">
@@ -384,16 +384,18 @@ export function Footer({ go }: { go?: (t: Tab) => void }) {
         <div>
           <div className="brand">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/landing/zigg-icon.png" alt="" />
+            <img src="/landing/zigg-icon.webp" alt="" />
             <b>ZIGG</b>
           </div>
           <p className="ft-desc">{t.footer.desc}</p>
           <div className="ft-store">
             <a href={LINKS.appStore} target="_blank" rel="noopener noreferrer">
-              App Store
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/appStore.png" alt="Download on the App Store" />
             </a>
             <a href={LINKS.googlePlay} target="_blank" rel="noopener noreferrer">
-              Google Play
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/googlePlay.png" alt="Get it on Google Play" />
             </a>
           </div>
         </div>

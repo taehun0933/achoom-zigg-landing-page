@@ -162,7 +162,7 @@ export function Lockup() {
   return (
     <div className="lockup">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="z" src="/landing/zigg-icon.png" alt="ZIGG" />
+      <img className="z" src="/landing/zigg-icon.webp" alt="ZIGG" />
       <span className="x">✕</span>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="god" src="/landing/godition-text.svg" alt="GODITION" />

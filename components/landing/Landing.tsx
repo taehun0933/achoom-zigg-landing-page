@@ -82,7 +82,7 @@ function LandingInner({
       <header className={"hdr" + (scrolled ? " scrolled" : "")}>
         <button className="brand" onClick={() => go("main")}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/landing/zigg-icon.png" alt="ZIGG" />
+          <img src="/landing/zigg-icon.webp" alt="ZIGG" />
           <b>ZIGG</b>
         </button>
         {/* 언어 토글 — 데스크탑은 탭 앞, 모바일은 햄버거 왼쪽에 항상 노출 */}

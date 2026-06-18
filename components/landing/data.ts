@@ -32,9 +32,9 @@ export const LINKS = {
 
 /** team space key function 이미지 (텍스트는 locales 에서 — 기능 의미에 맞춰 매핑) */
 export const KEYFUNC_IMAGES = [
-  "/landing/teamspace-1.png",
-  "/landing/teamspace-2.png",
-  "/images/spaceMemberInvite.png",
+  "/landing/teamspace-1.webp",
+  "/landing/teamspace-2.webp",
+  "/images/spaceMemberInvite.webp",
 ];
 
 export type Tab = "main" | "audition" | "teamspace";

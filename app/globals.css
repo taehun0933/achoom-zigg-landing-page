@@ -1405,20 +1405,21 @@ a.nc-slide {
   margin-top: 18px;
 }
 .ft-store a {
-  padding: 12px 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.04);
-  color: #fff;
-  font-weight: 700;
-  font-size: 14px;
+  display: inline-flex;
+  border-radius: 10px;
+  overflow: hidden;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
 }
 .ft-store a:hover {
-  background: #fff;
-  color: #120a2a;
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.ft-store img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 .ft-base {
   margin-top: 50px;
